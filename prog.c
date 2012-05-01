@@ -10,7 +10,7 @@ int main(void) {
     unsigned int size;
     Acronym * acronyms;
 
-    printf("** zWTF (niveau 2) **\n\n");   
+    printf("** zWTF (niveau 2) **\n\n");
 
     loadAcronyms("wtf", "define", &acronyms, &size);
     if(acronyms == NULL) {
@@ -36,10 +36,10 @@ int main(void) {
     else {
         printf("Aucune définition trouvée\n");
     }
-       
+
     free(wtf);
 errStr:
     freeAcronyms(acronyms, size);
-errLoad: 
+errLoad:
     return 0;
 }

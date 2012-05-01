@@ -14,20 +14,28 @@ int acronymCmp(const void * a, const void * b) {
     return res;
 }
 
+void sort(const void ** array, unsigned int size, COMPARE cmpFct) {
+
+}
+
+char isSorted(const void ** array, unsigned int size, COMPARE cmpFct) {
+    return 1;
+}
+
+const void * binarySearch(const void ** array, unsigned int size, const void * value, COMPARE cmpFct) {
+    return 0;
+}
+
 const Acronym * getFirstAcronym(const Acronym * acronyms, unsigned int size, const char * wtf) {
 
-    // Pour le moment
+    const void ** array = (const void **)acronyms;
+    const void * value = (const void *)wtf;
+    COMPARE cmpFct = acronymCmp;
 
-    // Suppose le tableau déjà trié; fait une recharche bidon
-
-    const Acronym * acronym = NULL;
-    unsigned int i = 0;    
-    while(i < size && acronym == NULL) {
-        if(strcmp(acronyms[i].wtf, wtf) == 0) {
-            acronym = (acronyms+i);
-        }
-        i++;
+    if(!isSorted(array, size, cmpFct)) {
+        sort(array, size, cmpFct);
     }
 
-    return acronym;
+    return (const Acronym *)binarySearch(array, size, value, cmpFct);
 }
+
