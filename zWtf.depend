@@ -13,8 +13,9 @@
 
 1335903832 e:\wamp\www\zwtf\acronym.h
 
-1335905034 e:\wamp\www\zwtf\algorithms.h
+1335908814 e:\wamp\www\zwtf\algorithms.h
 	"acronym.h"
+	<stddef.h>
 
 1335903888 source:e:\wamp\www\zwtf\ressources.c
 	"ressources.h"
@@ -22,7 +23,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1335903908 source:e:\wamp\www\zwtf\algorithms.c
+1335907368 source:e:\wamp\www\zwtf\algorithms.c
 	"algorithms.h"
 	<stddef.h>
 	<string.h>

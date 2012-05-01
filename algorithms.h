@@ -2,6 +2,7 @@
 #define ALGORITHMS_H_
 
     #include "acronym.h"
+    #include <stddef.h>
 
     /**
       * Signature de la fonction de comparaison utilisée dans
@@ -17,20 +18,20 @@
       * Fonction triant le tableau array de taille size en utilisant
       * la fonction pointée par "cmpFct" pour les comparaisons.
       */
-    void sort(const void ** array, unsigned int size, COMPARE cmpFuct);
+    const void ** mergeSort(const void ** array, size_t varSize, const unsigned int size, COMPARE cmpFuct);
 
     /**
       * Regarde si le tableau array de taille size est trié selon la fonction
       * de comparaison cmpFct
       */
-    char isSorted(const void ** array, unsigned int size, COMPARE cmpFct);
+    char isSorted(const void ** array, size_t varSize, unsigned int size, COMPARE cmpFct);
 
     /**
       * Fonction cherchant le premier element value dans le tableau array
       * de taille size en utilisant la fonction pointée par "cmpFct"
       * pour les comparaisons.
       */
-    const void * binarySearch(const void ** array, unsigned int size,
+    const void * binarySearch(const void ** array, size_t varSize, unsigned int size,
                               const void * value, COMPARE cmpFct);
 
     /**
