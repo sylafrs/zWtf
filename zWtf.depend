@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1335904539 source:e:\wamp\www\zwtf\prog.c
+1335909478 source:e:\wamp\www\zwtf\prog.c
 	"ressources.h"
 	"algorithms.h"
 	"acronym.h"
@@ -23,7 +23,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1335907368 source:e:\wamp\www\zwtf\algorithms.c
+1335908981 source:e:\wamp\www\zwtf\algorithms.c
 	"algorithms.h"
 	<stddef.h>
 	<string.h>

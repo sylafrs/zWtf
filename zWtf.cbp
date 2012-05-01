@@ -31,9 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="acronym.h" />
+		<Unit filename="algorithms.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="algorithms.h" />
+		<Unit filename="prog.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ressources.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ressources.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -5,9 +5,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define M 7
+
+int cmpint(const void * a, const void * b) {
+    int * v1 = (int*)a;
+    int * v2 = (int*)b;
+    return *v1-*v2;
+}
+
+void printest(const int * t) {
+    int i;
+    for(i=0;i<M;i++){
+        printf("%d ", t[i]);
+    }
+    printf("\n");
+}
+
 int main(void) {
 
-    unsigned int size;
+    /*unsigned int size;
     Acronym * acronyms;
 
     printf("** zWTF (niveau 2) **\n\n");
@@ -41,5 +57,14 @@ int main(void) {
 errStr:
     freeAcronyms(acronyms, size);
 errLoad:
+    return 0;*/
+
+    int test[] = {5, 1, 7, 2, 4, 3, 6};
+
+    printest(test);
+    const void ** array = (const void **)test;
+    mergeSort(array, sizeof(int), M, cmpint);
+    printest(test);
+
     return 0;
 }
