@@ -22,48 +22,51 @@ void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE 
     }
 
     // Split the array to two array
-    void * left = array;
     unsigned int leftSize = size/2;
-    void * right = array+(leftSize*varSize);
+    void * left = malloc(leftSize*varSize);
+    memcpy(left, array, leftSize*varSize);
+
     unsigned int rightSize = size-leftSize;
+    void * right = malloc(rightSize*varSize);
+    memcpy(right, array+(leftSize*varSize), rightSize*varSize);
 
     // Sort these array
-    left = mergeSort(left, varSize, leftSize, cmpFct);
-    right = mergeSort(right, varSize, rightSize, cmpFct);
+    mergeSort(left, varSize, leftSize, cmpFct);
+    mergeSort(right, varSize, rightSize, cmpFct);
 
     // Merge the result into tmp
-    void * tmp = malloc(size*varSize);
     unsigned int i = 0;
+    void * ptrLeft = left;
+    void * ptrRight = right;
     while(i < size) {
         if(leftSize > 0 && rightSize > 0) {
-            if(cmpFct(left, right) <= 0) {
-                memcpy(tmp+i*varSize, left, varSize);
-                left+=varSize;
+            if(cmpFct(ptrLeft, ptrRight) <= 0) {
+                memcpy(array+i*varSize, ptrLeft, varSize);
+                ptrLeft+=varSize;
                 leftSize--;
             }
             else {
-                memcpy(tmp+i*varSize, right, varSize);
-                right+=varSize;
+                memcpy(array+i*varSize, ptrRight, varSize);
+                ptrRight+=varSize;
                 rightSize--;
             }
         }
         else if(leftSize > 0) {
-            memcpy(tmp+i*varSize, left, varSize);
-            left+=varSize;
+            memcpy(array+i*varSize, ptrLeft, varSize);
+            ptrLeft+=varSize;
             leftSize--;
         }
         else {
-            memcpy(tmp+i*varSize, right, varSize);
-            right+=varSize;
+            memcpy(array+i*varSize, ptrRight, varSize);
+            ptrRight+=varSize;
             rightSize--;
         }
 
         i++;
     }
 
-    // Array <- tmp
-    memcpy(array, tmp, size*varSize);
-    free(tmp);
+    free(left);
+    free(right);
 
     return array;
 }
