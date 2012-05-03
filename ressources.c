@@ -9,7 +9,7 @@ void loadAcronyms(const char * wtfPath, const char * defPath, Acronym ** acronym
 
     *acronyms = NULL;
     *size = 0;
-   
+
     if(!(wtfFile = fopen(wtfPath, "r"))) {
         perror(wtfPath);
         goto errWtf;
@@ -37,7 +37,7 @@ void loadAcronyms(const char * wtfPath, const char * defPath, Acronym ** acronym
         }
         *acronyms = tmpPtr;
         (*acronyms)[(*size)-1] = tmpAcronym;
-    }    
+    }
 
 errAcros:
     fclose(defFile);
@@ -48,12 +48,14 @@ errWtf:
 }
 
 char loadAcronym(FILE * wtfFile, FILE * defFile, Acronym * acronym) {
- 
+
+    acronym->wtf = acronym->def = NULL;
+
     if(!myGetLine(wtfFile, &(acronym->wtf))) {
         return 0;
     }
 
-    if(!myGetLine(defFile, &(acronym->def))) {   
+    if(!myGetLine(defFile, &(acronym->def))) {
         free(acronym->wtf);
         return 0;
     }
@@ -66,8 +68,11 @@ char myGetLine(FILE * file, char ** string) {
     char tmpChar;
     size_t size = 0;
 
-    *string = NULL;
-    
+    if(*string != NULL) {
+        free(*string);
+        *string = NULL;
+    }
+
     tmpChar = fgetc(file);
     while(tmpChar != '\0' && tmpChar != '\n' && tmpChar != EOF) {
         size++;
@@ -82,7 +87,7 @@ char myGetLine(FILE * file, char ** string) {
             return 0;
         }
         *string = tmpPtr;
-        (*string)[size-1] = tmpChar;        
+        (*string)[size-1] = tmpChar;
         tmpChar = fgetc(file);
     }
 
@@ -117,7 +122,7 @@ void freeAcronym(Acronym * acronym) {
 void freeAcronyms(Acronym * acronyms, unsigned int size) {
     if(acronyms != NULL) {
         unsigned int i = 0;
-        while(i < size) {            
+        while(i < size) {
             freeAcronym(acronyms+i);
             i++;
         }
