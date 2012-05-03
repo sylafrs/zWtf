@@ -18,7 +18,7 @@
       * Fonction triant le tableau array de taille size en utilisant
       * la fonction pointée par "cmpFct" pour les comparaisons.
       */
-    const void ** mergeSort(const void ** array, size_t varSize, const unsigned int size, COMPARE cmpFuct);
+    void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE cmpFuct);
 
     /**
       * Regarde si le tableau array de taille size est trié selon la fonction

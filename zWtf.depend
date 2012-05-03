@@ -28,3 +28,32 @@
 	<stddef.h>
 	<string.h>
 
+1336076110 source:c:\documents and settings\admin\bureau\zwtf\prog.c
+	"ressources.h"
+	"algorithms.h"
+	"acronym.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1336075618 c:\documents and settings\admin\bureau\zwtf\ressources.h
+	<stdio.h>
+	"acronym.h"
+
+1336075618 c:\documents and settings\admin\bureau\zwtf\acronym.h
+
+1336076073 c:\documents and settings\admin\bureau\zwtf\algorithms.h
+	"acronym.h"
+	<stddef.h>
+
+1336075618 source:c:\documents and settings\admin\bureau\zwtf\ressources.c
+	"ressources.h"
+	"acronym.h"
+	<stdio.h>
+	<stdlib.h>
+
+1336076462 source:c:\documents and settings\admin\bureau\zwtf\algorithms.c
+	"algorithms.h"
+	<stdlib.h>
+	<string.h>
+

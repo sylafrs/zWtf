@@ -1,5 +1,5 @@
 #include "algorithms.h"
-#include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
 
 int acronymCmp(const void * a, const void * b) {
@@ -14,7 +14,7 @@ int acronymCmp(const void * a, const void * b) {
     return res;
 }
 
-const void ** mergeSort(const void ** array, size_t varSize, const unsigned int size, COMPARE cmpFct) {
+void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE cmpFct) {
 
     // if the array has only one element, it is sorted !
     if(size == 1) {
@@ -22,9 +22,9 @@ const void ** mergeSort(const void ** array, size_t varSize, const unsigned int 
     }
 
     // Split the array to two array
-    const void ** left = array;
+    void * left = array;
     unsigned int leftSize = size/2;
-    const void ** right = array+(leftSize*varSize);
+    void * right = array+(leftSize*varSize);
     unsigned int rightSize = size-leftSize;
 
     // Sort these array
@@ -32,28 +32,28 @@ const void ** mergeSort(const void ** array, size_t varSize, const unsigned int 
     right = mergeSort(right, varSize, rightSize, cmpFct);
 
     // Merge the result into tmp
-    const void * tmp[size];
+    void * tmp = malloc(size*varSize);
     unsigned int i = 0;
     while(i < size) {
         if(leftSize > 0 && rightSize > 0) {
             if(cmpFct(left, right) <= 0) {
-                tmp[i] = left;
+                memcpy(tmp+i*varSize, left, varSize);
                 left+=varSize;
                 leftSize--;
             }
             else {
-                tmp[i] = right;
+                memcpy(tmp+i*varSize, right, varSize);
                 right+=varSize;
                 rightSize--;
             }
         }
         else if(leftSize > 0) {
-            tmp[i] = left;
+            memcpy(tmp+i*varSize, left, varSize);
             left+=varSize;
             leftSize--;
         }
         else {
-            tmp[i] = right;
+            memcpy(tmp+i*varSize, right, varSize);
             right+=varSize;
             rightSize--;
         }
@@ -62,9 +62,8 @@ const void ** mergeSort(const void ** array, size_t varSize, const unsigned int 
     }
 
     // Array <- tmp
-    for(i = 0; i < size; i++) {
-        *(array + (i*varSize)) = *(tmp + (i*varSize));
-    }
+    memcpy(array, tmp, size*varSize);
+    free(tmp);
 
     return array;
 }
