@@ -14,6 +14,13 @@ int acronymCmp(const void * a, const void * b) {
     return res;
 }
 
+int wtfCmp(const void * a, const void * b) {
+    const Acronym * acronym = (const Acronym *)a;
+    const char * wtf = (const char *)b;
+
+    return strcmp(acronym->wtf, wtf);
+}
+
 void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE cmpFct) {
 
     // if the array has only one element, it is sorted !
@@ -106,8 +113,8 @@ const void * binarySearch(const void * array, size_t varSize, unsigned int size,
     const void * first = NULL;
 
     if(found) {
-        first = array+imid*varSize;
-        while((cmpFct(first-varSize, value) == 0) && first >= array) {
+        first = array+(imid*varSize);
+        while((cmpFct(first-varSize, value) == 0) && first-varSize >= array) {
             first -= varSize;
         }
     }
@@ -115,40 +122,16 @@ const void * binarySearch(const void * array, size_t varSize, unsigned int size,
     return first;
 }
 
-/*int binary_search(int A[], int key, int imin, int imax)
-{
-  // continue searching while [imin,imax] is not empty
-  while (imax >= imin)
-    {
-      // calculate the midpoint for roughly equal partition
-      int imid = (imin + imax) / 2;
-
-      // determine which subarray to search
-      if      (A[imid] <  key)
-        // change min index to search upper subarray
-        imin = imid + 1;
-      else if (A[imid] > key )
-        // change max index to search lower subarray
-        imax = imid - 1;
-      else
-        // key found at index imid
-        return imid;
-  }
-  // key not found
-  return KEY_NOT_FOUND;
-}*/
-
 const Acronym * getFirstAcronym(const Acronym * acronyms, unsigned int size, const char * wtf) {
 
-    const void ** array = (const void **)acronyms;
-    const void * value = (const void *)wtf;
+    void * array = (void *)acronyms;
     size_t varSize = sizeof(Acronym);
-    COMPARE cmpFct = acronymCmp;
 
-    if(!isSorted(array, varSize, size, cmpFct)) {
-        mergeSort(array, varSize, size, cmpFct);
+    if(!isSorted(array, varSize, size, acronymCmp)) {
+        mergeSort(array, varSize, size, acronymCmp);
     }
 
-    return (const Acronym *)binarySearch(array, varSize, size, value, cmpFct);
+    const void * value = (const void *)wtf;
+    return (const Acronym *)binarySearch(array, varSize, size, value, wtfCmp);
 }
 

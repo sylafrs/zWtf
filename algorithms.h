@@ -35,9 +35,15 @@
                               const void * value, COMPARE cmpFct);
 
     /**
-      * Utilise strcmp
+      * Utilise strcmp, compare deux acronymes.
+      * La comparaison se fait d'abord sur le WTF puis sur la définition
       */
     int acronymCmp(const void * a, const void * b);
+
+    /**
+      * Utilise strcmp, compare le WTF d'un acronyme à une chaine
+      */
+    int wtfCmp(const void * a, const void * b);
 
     /**
       * Utilise binarySearch avec acronymCmp

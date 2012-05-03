@@ -57,3 +57,32 @@
 	<stdlib.h>
 	<string.h>
 
+1336080198 source:c:\wamp\www\zwtf\prog.c
+	"ressources.h"
+	"algorithms.h"
+	"acronym.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1336080198 c:\wamp\www\zwtf\ressources.h
+	<stdio.h>
+	"acronym.h"
+
+1336080198 c:\wamp\www\zwtf\acronym.h
+
+1336080800 c:\wamp\www\zwtf\algorithms.h
+	"acronym.h"
+	<stddef.h>
+
+1336080198 source:c:\wamp\www\zwtf\ressources.c
+	"ressources.h"
+	"acronym.h"
+	<stdio.h>
+	<stdlib.h>
+
+1336080860 source:c:\wamp\www\zwtf\algorithms.c
+	"algorithms.h"
+	<stdlib.h>
+	<string.h>
+
