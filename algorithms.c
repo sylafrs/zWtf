@@ -71,7 +71,7 @@ void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE 
     return array;
 }
 
-char isSorted(const void ** array, size_t varSize, unsigned int size, COMPARE cmpFct) {
+char isSorted(const void * array, size_t varSize, unsigned int size, COMPARE cmpFct) {
 
     char sorted = 1;
     unsigned char i = 1;
@@ -83,9 +83,60 @@ char isSorted(const void ** array, size_t varSize, unsigned int size, COMPARE cm
     return sorted;
 }
 
-const void * binarySearch(const void ** array, size_t varSize, unsigned int size, const void * value, COMPARE cmpFct) {
-    return 0;
+const void * binarySearch(const void * array, size_t varSize, unsigned int size, const void * value, COMPARE cmpFct) {
+
+    unsigned int imin = 0;
+    unsigned int imax = size-1;
+    unsigned int imid;
+
+    char found = 0;
+
+    while(!found && imax >= imin) {
+        imid = (imin+imax)/2;
+
+        // Divide the searching area by 2
+        if(cmpFct(array+(imid*varSize), value) < 0)
+            imin = imid + 1;
+        else if(cmpFct(array+(imid*varSize), value) > 0)
+            imax = imid - 1;
+        else
+            found = 1;
+    }
+
+    const void * first = NULL;
+
+    if(found) {
+        first = array+imid*varSize;
+        while((cmpFct(first-varSize, value) == 0) && first >= array) {
+            first -= varSize;
+        }
+    }
+
+    return first;
 }
+
+/*int binary_search(int A[], int key, int imin, int imax)
+{
+  // continue searching while [imin,imax] is not empty
+  while (imax >= imin)
+    {
+      // calculate the midpoint for roughly equal partition
+      int imid = (imin + imax) / 2;
+
+      // determine which subarray to search
+      if      (A[imid] <  key)
+        // change min index to search upper subarray
+        imin = imid + 1;
+      else if (A[imid] > key )
+        // change max index to search lower subarray
+        imax = imid - 1;
+      else
+        // key found at index imid
+        return imid;
+  }
+  // key not found
+  return KEY_NOT_FOUND;
+}*/
 
 const Acronym * getFirstAcronym(const Acronym * acronyms, unsigned int size, const char * wtf) {
 

@@ -24,14 +24,14 @@
       * Regarde si le tableau array de taille size est trié selon la fonction
       * de comparaison cmpFct
       */
-    char isSorted(const void ** array, size_t varSize, unsigned int size, COMPARE cmpFct);
+    char isSorted(const void * array, size_t varSize, unsigned int size, COMPARE cmpFct);
 
     /**
       * Fonction cherchant le premier element value dans le tableau array
       * de taille size en utilisant la fonction pointée par "cmpFct"
       * pour les comparaisons.
       */
-    const void * binarySearch(const void ** array, size_t varSize, unsigned int size,
+    const void * binarySearch(const void * array, size_t varSize, unsigned int size,
                               const void * value, COMPARE cmpFct);
 
     /**
