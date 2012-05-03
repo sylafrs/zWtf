@@ -14,11 +14,11 @@ When it's done, it enumarates every possible definition for the acronym typed.
 
 ### Files
 
-* *acronym.h* : Contains the definition of the Acronym structure (two pointers to char array (strings))
-* *ressources.h* : Contains the declaration of the ressources.c functions
-* *algorithms.h* : Contains the declaration of the algorithms.c functions
-* *prog.c* : Contains the main function
-* *ressources.c* : Contains functions that load, read and free the Acronyms
-* *algorithms.c* : Contains useful functions (generic merge sort and binary search)
-* *Makefile* : Do the "make" command and enjoy ;)
-* *README.md* : What you are reading ;)
+* **acronym.h** : Contains the definition of the Acronym structure (two pointers to char array (strings))
+* **ressources.h** : Contains the declaration of the ressources.c functions
+* **algorithms.h** : Contains the declaration of the algorithms.c functions
+* **prog.c** : Contains the main function
+* **ressources.c** : Contains functions that load, read and free the Acronyms
+* **algorithms.c** : Contains useful functions (generic merge sort and binary search)
+* **Makefile** : Do the "make" command and enjoy ;)
+* **README.md** : What you are reading ;)
