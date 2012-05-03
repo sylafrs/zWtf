@@ -1,4 +1,4 @@
-## zLib
+## zWtf
 ### Presentation
 A for C-beginner Exercice from the siteduzero website.
 
