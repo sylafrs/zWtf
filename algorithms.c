@@ -114,7 +114,7 @@ const void * binarySearch(const void * array, size_t varSize, unsigned int size,
 
     if(found) {
         first = array+(imid*varSize);
-        while((cmpFct(first-varSize, value) == 0) && first-varSize >= array) {
+        while(first-varSize >= array && (cmpFct(first-varSize, value) == 0)) {
             first -= varSize;
         }
     }
