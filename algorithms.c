@@ -41,25 +41,28 @@ void * mergeSort2(void * array1, void* array2, size_t varSize, const unsigned in
     }
 
     /* Merge */
-    unsigned int l, r, i;
-    for(l = 0, r = 0, i = 0; l < leftSize && r < rightSize; i++) {
-        if(cmpFct(left2+l*varSize, right2+r*varSize) < 0) {
-            memcpy(array1+i*varSize, left2+l*varSize, varSize);
-            l++;
+	void * array = array1;
+	while(leftSize > 0 && rightSize > 0) {
+		if(cmpFct(left2, right2) < 0) {
+            memcpy(array, left2, varSize);
+            left2 += varSize;	
+			leftSize--;
         }
         else {
-            memcpy(array1+i*varSize, right2+r*varSize, varSize);
-            r++;
+            memcpy(array, right2, varSize);
+            right2 += varSize;
+			rightSize--;
         }
+		array += varSize;
+	}   
+
+    if(leftSize > 0) {
+        memcpy(array, left2, leftSize);
+        array += leftSize;
     }
 
-    if(l < leftSize) {
-        memcpy(array1+i*varSize, left2+l*varSize, leftSize-l);
-        i += leftSize-l;
-    }
-
-    if(r < rightSize) {
-        memcpy(array1+i*varSize, right2+r*varSize, rightSize-r);
+    if(rightSize > 0) {
+        memcpy(array, right2, rightSize);
     }
 
     return array1;
