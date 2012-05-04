@@ -57,19 +57,19 @@ void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE 
                 ptrRight+=varSize;
                 rightSize--;
             }
+            
+            i++;
         }
         else if(leftSize > 0) {
-            memcpy(array+i*varSize, ptrLeft, varSize);
-            ptrLeft+=varSize;
-            leftSize--;
+            memcpy(array+i*varSize, ptrLeft, varSize*leftSize);            
+            i+=leftSize;
+            leftSize = 0;
         }
         else {
-            memcpy(array+i*varSize, ptrRight, varSize);
-            ptrRight+=varSize;
-            rightSize--;
-        }
-
-        i++;
+            memcpy(array+i*varSize, ptrRight, varSize*rightSize);
+            i+=rightSize;
+            rightSize = 0;
+        }        
     }
 
     free(left);
