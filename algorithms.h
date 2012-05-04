@@ -15,6 +15,12 @@
     typedef int (*COMPARE)(const void * a, const void * b);
 
     /**
+      * Tri le tableau array2 et stocke le resultat dans array1
+      * Attention : le tableau array2 sera modifié.
+      */
+    void * mergeSort2(void * array1, void* array2, size_t varSize, const unsigned int size, COMPARE cmpFct);
+
+    /**
       * Fonction triant le tableau array de taille size en utilisant
       * la fonction pointée par "cmpFct" pour les comparaisons.
       */

@@ -21,60 +21,61 @@ int wtfCmp(const void * a, const void * b) {
     return strcmp(acronym->wtf, wtf);
 }
 
-void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE cmpFct) {
+void * mergeSort2(void * array1, void* array2, size_t varSize, const unsigned int size, COMPARE cmpFct) {
 
-    // if the array has only one element, it is sorted !
-    if(size == 1) {
-        return array;
+    /* Divide by 2 ( + swap) */
+    unsigned int leftSize = size/2;
+    unsigned int rightSize = size-leftSize;
+
+    void* left1 = array1;
+    void* right1 = array1 + (leftSize * varSize);
+
+    void* left2 = array2;
+    void* right2 = array2 + (leftSize * varSize);
+
+    if(leftSize > 1) {
+        mergeSort2(left2, left1, varSize, leftSize, cmpFct);
+    }
+    if(rightSize > 1) {
+        mergeSort2(right2, right1, varSize, rightSize, cmpFct);
     }
 
-    // Split the array to two array
-    unsigned int leftSize = size/2;
-    void * left = malloc(leftSize*varSize);
-    memcpy(left, array, leftSize*varSize);
-
-    unsigned int rightSize = size-leftSize;
-    void * right = malloc(rightSize*varSize);
-    memcpy(right, array+(leftSize*varSize), rightSize*varSize);
-
-    // Sort these array
-    mergeSort(left, varSize, leftSize, cmpFct);
-    mergeSort(right, varSize, rightSize, cmpFct);
-
-    // Merge the result into tmp
-    unsigned int i = 0;
-    void * ptrLeft = left;
-    void * ptrRight = right;
-    while(i < size) {
-        if(leftSize > 0 && rightSize > 0) {
-            if(cmpFct(ptrLeft, ptrRight) <= 0) {
-                memcpy(array+i*varSize, ptrLeft, varSize);
-                ptrLeft+=varSize;
-                leftSize--;
-            }
-            else {
-                memcpy(array+i*varSize, ptrRight, varSize);
-                ptrRight+=varSize;
-                rightSize--;
-            }
-            
-            i++;
-        }
-        else if(leftSize > 0) {
-            memcpy(array+i*varSize, ptrLeft, varSize*leftSize);            
-            i+=leftSize;
-            leftSize = 0;
+    /* Merge */
+    unsigned int l, r, i;
+    for(l = 0, r = 0, i = 0; l < leftSize && r < rightSize; i++) {
+        if(cmpFct(left2+l*varSize, right2+r*varSize) < 0) {
+            memcpy(array1+i*varSize, left2+l*varSize, varSize);
+            l++;
         }
         else {
-            memcpy(array+i*varSize, ptrRight, varSize*rightSize);
-            i+=rightSize;
-            rightSize = 0;
-        }        
+            memcpy(array1+i*varSize, right2+r*varSize, varSize);
+            r++;
+        }
     }
 
-    free(left);
-    free(right);
+    if(l < leftSize) {
+        memcpy(array1+i*varSize, left2+l*varSize, leftSize-l);
+        i += leftSize-l;
+    }
 
+    if(r < rightSize) {
+        memcpy(array1+i*varSize, right2+r*varSize, rightSize-r);
+    }
+
+    return array1;
+}
+
+void * mergeSort(void * array, size_t varSize, const unsigned int size, COMPARE cmpFct) {
+
+    void * tmp = malloc(size*varSize);
+    if(tmp == NULL) {
+        return NULL;
+    }
+
+    memcpy(tmp, array, size*varSize);
+    mergeSort2(array, tmp, varSize, size, cmpFct);
+
+    free(tmp);
     return array;
 }
 
